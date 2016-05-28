@@ -160,7 +160,7 @@ public class Calculadora extends JFrame{
 	 */
 	private void operacionPulsado(String tecla) {
 		if (tecla.equals("=")) {
-			
+			calcularResultado();
 		} else if (tecla.equals("CE")) {
 			resultado = 0;
 			pantalla.setText("");
@@ -168,12 +168,30 @@ public class Calculadora extends JFrame{
 		} else {
 			operacion = tecla;
 			if ((resultado > 0) && !nuevaOperacion) {
-				
+				calcularResultado();
 			} else {
 				resultado = new Double(pantalla.getText());
 			}
 		}
 
 		nuevaOperacion = true;
+	}
+        
+        /**
+	 * Calcula el resultado y lo muestra por pantalla
+	 */
+	private void calcularResultado() {
+		if (operacion.equals("+")) {
+			resultado += new Double(pantalla.getText());
+		} else if (operacion.equals("-")) {
+			resultado -= new Double(pantalla.getText());
+		} else if (operacion.equals("/")) {
+			resultado /= new Double(pantalla.getText());
+		} else if (operacion.equals("*")) {
+			resultado *= new Double(pantalla.getText());
+		}
+
+		pantalla.setText("" + resultado);
+		operacion = "";
 	}
 }
