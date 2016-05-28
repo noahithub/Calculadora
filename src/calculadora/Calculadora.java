@@ -110,7 +110,7 @@ public class Calculadora extends JFrame{
 			@Override
 			public void mouseReleased(MouseEvent evt) {
 				JButton btn = (JButton) evt.getSource();
-				
+				numeroPulsado(btn.getText());
 			}
 		});
 
@@ -131,10 +131,49 @@ public class Calculadora extends JFrame{
 			@Override
 			public void mouseReleased(MouseEvent evt) {
 				JButton btn = (JButton) evt.getSource();
-				
+				operacionPulsado(btn.getText());
 			}
 		});
 
 		panelOperaciones.add(btn);
+	}
+        
+        /**
+	 * Gestiona las pulsaciones de teclas numéricas
+	 * 
+	 * @param digito
+	 *            tecla pulsada
+	 */
+	private void numeroPulsado(String digito) {
+		if (pantalla.getText().equals("0") || nuevaOperacion) {
+			pantalla.setText(digito);
+		} else {
+			pantalla.setText(pantalla.getText() + digito);
+		}
+		nuevaOperacion = false;
+	}
+
+	/**
+	 * Gestiona el gestiona las pulsaciones de teclas de operación
+	 * 
+	 * @param tecla
+	 */
+	private void operacionPulsado(String tecla) {
+		if (tecla.equals("=")) {
+			
+		} else if (tecla.equals("CE")) {
+			resultado = 0;
+			pantalla.setText("");
+			nuevaOperacion = true;
+		} else {
+			operacion = tecla;
+			if ((resultado > 0) && !nuevaOperacion) {
+				
+			} else {
+				resultado = new Double(pantalla.getText());
+			}
+		}
+
+		nuevaOperacion = true;
 	}
 }
